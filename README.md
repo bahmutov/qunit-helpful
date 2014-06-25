@@ -77,6 +77,7 @@ Node:
 ```
 npm install qunit-helpful --save-dev
 // load qunit-helpful before unit tests
+$ qunit -c node_modules/qunit-helpful/qunit-helpful.js -t tests.js
 ```
 
 Browser:
