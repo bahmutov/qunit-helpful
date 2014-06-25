@@ -28,6 +28,14 @@ Module: global function syntax (ok, equal) Test: ok expression
 failed ok "2 + 2 === 5"
 ```
 
+### QUnit with failed ok(expression)
+
+![qunit-helpful-off](images/qunit-helpful-off.png)
+
+### QUnit + qunit-helpful with failed ok(expression)
+
+![qunit-helpful-on](images/qunit-helpful-on.png)
+
 ## Explanation
 
 QUnit (Jasmine, Mocha, etc) first evaluates the arguments, then passes the computed
