@@ -1,0 +1,28 @@
+{
+  "name": "qunit-inject",
+  "main": "qunit-inject-browser.js",
+  "version": "0.4.0",
+  "description": "QUnit plugin for dependency injection into unit tests",
+  "keywords": [
+    "qunit",
+    "dependency",
+    "inject",
+    "test",
+    "assert"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/bahmutov/qunit-inject",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "configs",
+    "test",
+    "index.html",
+    "tests",
+    "Gruntfile.js",
+    "qunit-inject.js",
+    "package.json"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>"
+}

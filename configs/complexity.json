@@ -1,0 +1,20 @@
+{
+  "all": {
+    "src": ["qunit-once.js"],
+    "options": {
+      "errorsOnly": false,
+      "cyclomatic": 4,
+      "halstead": 12,
+      "maintainability": 80
+    }
+  },
+  "utils": {
+    "src": ["Gruntfile.js", "test/*.js"],
+    "options": {
+      "errorsOnly": false,
+      "cyclomatic": 4,
+      "halstead": 15,
+      "maintainability": 80
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "options": {
+    "jshintrc": ".jshintrc"
+  },
+  "default": {
+    "src": [ "*.js", "!qunit-inject-browser.js", "test/*.js" ]
+  }
+}
