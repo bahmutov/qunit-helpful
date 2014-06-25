@@ -1,76 +1,28 @@
-/* jshint -W117:false */
-(function (QUnit, env) {
-  if (env.__qunit_inject_initialized) {
-    return;
-  }
-  env.__qunit_inject_initialized = true;
+var check = require('check-types');
 
-  if (typeof QUnit !== 'object') {
-    throw new Error('undefined QUnit object');
-  }
-  var heroin = env.heroin;
-  if (typeof require === 'function') {
-    heroin = require('heroin');
-  }
-  if (typeof heroin !== 'function') {
-    throw new Error('No heroin to inject');
-  }
-  var assign = require('lodash.assign');
+(function (env) {
+  (function (QUnit) {
+    check.verify.object(QUnit, 'undefined QUnit object');
+    check.verify.fn(QUnit.test, 'QUnit.test should be a function');
 
-  var _module = QUnit.module;
-  if (typeof _module !== 'function') {
-    throw new Error('QUnit.module should be a function');
-  }
-  var _test = QUnit.test;
-  if (typeof _test !== 'function') {
-    throw new Error('QUnit.test should be a function');
-  }
-
-  var configs = {};
-  var lastModuleName;
-
-  QUnit.module = function (name, config) {
-    if (typeof config !== 'object') {
-      return _module.call(QUnit, name, config);
+    if (env.__qunit_helpful_initialized) {
+      return;
     }
+    env.__qunit_helpful_initialized = true;
 
-    if (typeof config.setup === 'function') {
-      var _setup = config.setup;
-      config.setup = function () {
-        _setup.call(QUnit.config.current.testEnvironment, QUnit.assert);
-        // overwrite config with updated values
-        assign(configs[name], QUnit.config.current.testEnvironment);
-      };
-    }
+    var _test = QUnit.test;
 
-    if (typeof config.teardown === 'function') {
-      var _teardown = config.teardown;
-      config.teardown = function () {
-        _teardown.call(QUnit.config.current.testEnvironment, QUnit.assert);
-        // overwrite config with updated values
-        assign(configs[name], QUnit.config.current.testEnvironment);
-      };
-    }
+    QUnit.test = function (a1, a2) {
+      var name = a1, fn = a2;
+      if (typeof a1 === 'function') {
+        fn = a1;
+        name = fn.name;
+      }
+      check.verify.string(name, 'missing test name string');
+      check.verify.fn(fn, 'missing test function');
 
-    configs[name] = config;
-    _module.call(QUnit, name, config);
-
-    lastModuleName = name;
-  };
-
-  QUnit.test = function (name, fn) {
-    if (typeof name === 'function') {
-      fn = name;
-      name = fn.name;
-    }
-
-    if (lastModuleName && configs[lastModuleName]) {
-      var dependencies = configs[lastModuleName];
-      var injected = heroin(fn, dependencies);
-      _test.call(QUnit, name, injected);
-    } else {
       _test.call(QUnit, name, fn);
-    }
-  };
-}(QUnit, typeof global === 'object' ? global : window));
+    };
+  }(env.QUnit));
+}(typeof global === 'object' ? global : window));
 
