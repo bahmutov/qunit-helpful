@@ -1,8 +1,8 @@
 {
-  "name": "qunit-inject",
+  "name": "qunit-helpful",
   "main": "qunit-inject-browser.js",
-  "version": "0.4.0",
-  "description": "QUnit plugin for dependency injection into unit tests",
+  "version": "0.1.0",
+  "description": "QUnit plugin to automatically show helpful info for failed assertions",
   "keywords": [
     "qunit",
     "dependency",
@@ -11,7 +11,7 @@
     "assert"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/bahmutov/qunit-inject",
+  "homepage": "https://github.com/bahmutov/qunit-helpful",
   "ignore": [
     "**/.*",
     "node_modules",

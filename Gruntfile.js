@@ -18,8 +18,8 @@ module.exports = function (grunt) {
 
     browserify: {
       all: {
-        src: 'qunit-inject.js',
-        dest: 'qunit-inject-browser.js'
+        src: 'qunit-helpful.js',
+        dest: 'qunit-helpful-browser.js'
       }
     },
 
@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 
     'node-qunit': {
       all: {
-        deps: './qunit-inject.js',
+        deps: './qunit-helpful.js',
         code: './test/tests.js',
         tests: ['./test/tests.js']
       }
@@ -61,7 +61,7 @@ module.exports = function (grunt) {
       src: [
         'index.html',
         'README.md',
-        'qunit-inject-browser.js',
+        'qunit-helpful-browser.js',
         'test/*.js'
       ]
     }
