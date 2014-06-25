@@ -40,7 +40,10 @@
     "test",
     "qunit",
     "plugin",
-    "inject"
+    "help",
+    "assertions",
+    "context",
+    "info"
   ],
   "license": "MIT",
   "main": "qunit-helpful.js",
