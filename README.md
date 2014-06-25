@@ -15,7 +15,41 @@
 ## Example:
 
 ```js
-coming soon
+// Standard QUnit
+QUnit.test('ok expression', function example() {
+  ok(2 + 2 === 5);
+});
+// output
+Errors:
+Module: global function syntax (ok, equal) Test: ok expression
+// load qunit-helpful.js before tests, same test output
+Errors:
+Module: global function syntax (ok, equal) Test: ok expression
+failed ok "2 + 2 === 5"
+```
+
+## Explanation
+
+QUnit (Jasmine, Mocha, etc) first evaluates the arguments, then passes the computed
+values to assertion functions. Thus the failed assertion has no idea what the actual expression was
+that failed. This forces you to write assertion messages, repeating the test condition
+
+```js
+QUnit.ok(2 + 2 === 4, '2 + 2 === 4');
+QUnit.equal(foo('a', 1), 'foo-a-1', 'calling foo with "a" and 1 produces "foo-a-1"');
+```
+
+*qunit-helpful* automatically rewrites your tests before QUnit executes them,
+adding the condition *souce* to the message string. Thus you can skip writing the
+same stuff
+
+```js
+QUnit.ok(2 + 2 === 4);
+// will be evaluated by QUnit as
+// QUnit.ok(2 + 2 === 4, 'ok 2 + 2 === 4');
+QUnit.equal(foo('a', 1), 'foo-a-1');
+// will be evaluated by QUnit as
+// QUnit.equal(foo('a', 1), 'foo-a-1', 'equal "foo('a', 1)" and "foo-a-1"');
 ```
 
 ## Install

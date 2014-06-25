@@ -7,7 +7,8 @@ var falafel = require('falafel');
     console.log(assertStatement.source());
     var conditionNode = assertStatement.expression.arguments[0];
     var condition = conditionNode.source();
-    var helpfulMessage = '\'failed condition "' + condition + '"';
+    condition = condition.replace(/'/g, '"');
+    var helpfulMessage = '\'failed ok [' + condition + ']';
 
     var msgArg = assertStatement.expression.arguments[1];
     if (msgArg) {
