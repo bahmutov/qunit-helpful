@@ -49,8 +49,8 @@ QUnit.test('ok expression', function example() {
 ## Explanation
 
 QUnit (Jasmine, Mocha, etc) first evaluates the arguments, then passes the computed
-values to assertion functions. Thus the failed assertion has no idea what the actual expression was
-that failed. This forces you to write assertion messages, repeating the test condition
+values to assertion functions. Thus the failed assertion has no idea what the failing expression was.
+This forces you to write assertion messages, repeating the test condition
 
 ```js
 QUnit.ok(2 + 2 === 4, '2 + 2 === 4');
@@ -58,7 +58,7 @@ QUnit.equal(foo('a', 1), 'foo-a-1', 'calling foo with "a" and 1 produces "foo-a-
 ```
 
 *qunit-helpful* automatically rewrites your tests before QUnit executes them,
-adding the condition *souce* to the message string. Thus you can skip writing the
+adding the condition *source* to the message string. Thus you can skip writing the
 same stuff
 
 ```js
