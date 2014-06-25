@@ -28,6 +28,16 @@ Module: global function syntax (ok, equal) Test: ok expression
 failed ok "2 + 2 === 5"
 ```
 
+Comparison screenshots with the failed assertions for source
+
+```js
+QUnit.test('ok expression', function example() {
+  ok(2 + 2 === 44); // fails
+  ok('foo' + 'bar' == 'foobar2'); // fails
+  ok("foo" + "bar" == 'foobar');
+});
+```
+
 ### QUnit with failed ok(expression)
 
 ![qunit-helpful-off](images/qunit-helpful-off.png)
