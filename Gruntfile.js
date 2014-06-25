@@ -12,7 +12,15 @@ module.exports = function (grunt) {
       }
     },
 
-    jshint: grunt.file.readJSON('configs/jshint.json'),
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-summary')
+      },
+      default: {
+        'src': [ '*.js', '!*-browser.js', 'test/*.js' ]
+      }
+    },
 
     complexity: grunt.file.readJSON('configs/complexity.json'),
 
