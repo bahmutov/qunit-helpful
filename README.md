@@ -70,6 +70,8 @@ QUnit.equal(foo('a', 1), 'foo-a-1');
 // QUnit.equal(foo('a', 1), 'foo-a-1', 'equal "foo('a', 1)" and "foo-a-1"');
 ```
 
+Unknown or custom assertions will be left unchanged.
+
 ## Install
 
 Node:

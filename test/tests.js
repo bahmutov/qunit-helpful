@@ -1,6 +1,6 @@
 (function () {
   /* global ok */
-  QUnit.module('global function syntax (ok, equal)');
+  QUnit.module('ok');
 
   QUnit.test('ok with message', function example() {
     ok(true, 'simple ok');
@@ -15,5 +15,24 @@
     ok(2 + 2 === 4);
     ok('foo' + 'bar' == 'foobar');
     ok("foo" + "bar" == 'foobar');
+  });
+}());
+
+(function () {
+  QUnit.module('QUnit.ok');
+
+  QUnit.test('QUnit.ok with message', function example() {
+    QUnit.ok(true, 'simple ok');
+  });
+
+  QUnit.test('QUnit.ok without message', function example() {
+    QUnit.ok(true);
+  });
+
+  QUnit.test('QUnit.ok expression', function example() {
+    // jshint -W109
+    QUnit.ok(2 + 2 === 4);
+    QUnit.ok('foo' + 'bar' == 'foobar');
+    QUnit.ok("foo" + "bar" == 'foobar');
   });
 }());
