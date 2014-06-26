@@ -4580,8 +4580,10 @@ var falafel = require('falafel');
 
     var _test = QUnit.test;
 
-    QUnit.test = function (a1, a2) {
-      var name = a1, fn = a2;
+    QUnit.test = function (a1, a2, a3) {
+      var name = a1,
+        nAssertions = (typeof a2 === 'number' ? a2 : null),
+        fn = (typeof a3 === 'function' ? a3 : a2);
       if (typeof a1 === 'function') {
         fn = a1;
         name = fn.name;
@@ -4589,14 +4591,18 @@ var falafel = require('falafel');
       check.verify.string(name, 'missing test name string');
       check.verify.fn(fn, 'missing test function');
 
-      check.verify.unemptyString(fn.name,
-        'for now qunit-helpful needs test function to have a name');
-      var output = falafel(fn.toString(), rewriteTestFunction);
+      var testSource = fn.toString();
+      if (!fn.name) {
+        testSource = '(' + testSource + ')';
+      }
+      //check.verify.unemptyString(fn.name,
+      //  'for now qunit-helpful needs test function to have a name');
+      var output = falafel(testSource, rewriteTestFunction);
       console.log('rewritten function\n' + output);
       /* jshint -W061 */
       fn = eval('(' + output + ')');
 
-      _test.call(QUnit, name, fn);
+      _test.call(QUnit, name, nAssertions, fn);
     };
   }(env.QUnit));
 }(typeof global === 'object' ? global : window));
