@@ -16,7 +16,7 @@
 
 ```js
 // Standard QUnit
-QUnit.test('ok expression', function example() {
+QUnit.test('ok expression', function () {
   ok(2 + 2 === 5);
 });
 // output
@@ -31,7 +31,7 @@ failed ok "2 + 2 === 5"
 Comparison screenshots with the failed assertions for source
 
 ```js
-QUnit.test('ok expression', function example() {
+QUnit.test('ok expression', function () {
   ok(2 + 2 === 44); // fails
   ok('foo' + 'bar' == 'foobar2'); // fails
   ok("foo" + "bar" == 'foobar');
