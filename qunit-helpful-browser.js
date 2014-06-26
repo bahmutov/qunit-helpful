@@ -4556,15 +4556,23 @@ var falafel = require('falafel');
     }
   }
 
+  function isOk(callee) {
+    return callee.name === 'ok';
+  }
+
+  function isQunitOk(callee) {
+    return callee.type === 'MemberExpression';
+  }
+
   function rewriteTestFunction(node) {
     if (node.type === 'BlockStatement') {
       node.body.forEach(function (statement) {
+        console.log(statement.expression);
         if (statement.type === 'ExpressionStatement' &&
           statement.expression.type === 'CallExpression' &&
-          statement.expression.callee.name === 'ok') {
+          (isOk(statement.expression.callee) || isQunitOk(statement.expression.callee))) {
             rewriteOkMessage(statement);
           }
-
       });
     }
   }

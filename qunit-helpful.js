@@ -2,15 +2,13 @@ var check = require('check-types');
 var falafel = require('falafel');
 
 (function (env) {
-  function rewriteOkMessage(assertStatement) {
-    console.log('rewriting ok');
-    console.log(assertStatement.source());
-    var conditionNode = assertStatement.expression.arguments[0];
+  function rewriteOkMessage(okStatement) {
+    var conditionNode = okStatement.expression.arguments[0];
     var condition = conditionNode.source();
     condition = condition.replace(/'/g, '"');
     var helpfulMessage = '\'failed ok [' + condition + ']';
 
-    var msgArg = assertStatement.expression.arguments[1];
+    var msgArg = okStatement.expression.arguments[1];
     if (msgArg) {
       var message = msgArg.source();
       var strippedQuotes = message.replace(/'/g, '');
@@ -21,15 +19,22 @@ var falafel = require('falafel');
     }
   }
 
+  function isOk(callee) {
+    return callee.name === 'ok';
+  }
+
+  function isQunitOk(callee) {
+    return callee.type === 'MemberExpression';
+  }
+
   function rewriteTestFunction(node) {
     if (node.type === 'BlockStatement') {
       node.body.forEach(function (statement) {
         if (statement.type === 'ExpressionStatement' &&
           statement.expression.type === 'CallExpression' &&
-          statement.expression.callee.name === 'ok') {
+          (isOk(statement.expression.callee) || isQunitOk(statement.expression.callee))) {
             rewriteOkMessage(statement);
           }
-
       });
     }
   }
@@ -63,7 +68,7 @@ var falafel = require('falafel');
       //check.verify.unemptyString(fn.name,
       //  'for now qunit-helpful needs test function to have a name');
       var output = falafel(testSource, rewriteTestFunction);
-      console.log('rewritten function\n' + output);
+      // console.log('rewritten function\n' + output);
       /* jshint -W061 */
       fn = eval('(' + output + ')');
 
