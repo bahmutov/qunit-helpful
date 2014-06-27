@@ -46,6 +46,11 @@ QUnit.test('ok expression', function () {
 
 ![qunit-helpful-on](images/qunit-helpful-on.png)
 
+## Supported assertions
+
+This package rewrites `QUnit.ok` assertion, leaving the rest of the
+code unchanged.
+
 ## Explanation
 
 QUnit (Jasmine, Mocha, etc) first evaluates the arguments, then passes the computed
