@@ -23,15 +23,16 @@ var falafel = require('falafel');
     if (statement.expression.arguments.length < 2) {
       return;
     }
-    var expectedNode = statement.expression.arguments[0];
-    var expected = expectedNode.source();
-    expected = expected.replace(/'/g, '"');
 
-    var actualNode = statement.expression.arguments[1];
+    var actualNode = statement.expression.arguments[0];
     var actual = actualNode.source();
     actual = actual.replace(/'/g, '"');
 
-    var helpfulMessage = '\'failed equal [' + expected + '](expected) == [' + actual + '](actual)';
+    var expectedNode = statement.expression.arguments[1];
+    var expected = expectedNode.source();
+    expected = expected.replace(/'/g, '"');
+
+    var helpfulMessage = '\'failed equal [' + actual + '](actual) == [' + expected + '](expected)';
 
     var msgArg = statement.expression.arguments[2];
     if (msgArg) {
@@ -40,7 +41,7 @@ var falafel = require('falafel');
       helpfulMessage += ', ' + strippedQuotes + '\'';
       msgArg.update(helpfulMessage);
     } else {
-      actualNode.update(actual + ', ' + helpfulMessage + '\'');
+      expectedNode.update(actual + ', ' + helpfulMessage + '\'');
     }
   }
 
@@ -50,7 +51,9 @@ var falafel = require('falafel');
     }
 
     function isQunitOk(callee) {
-      return callee.type === 'MemberExpression';
+      return callee.type === 'MemberExpression' &&
+        callee.object && callee.object.name === 'QUnit' &&
+        callee.property && callee.property.name === 'ok';
     }
 
     return isOk(statement.expression.callee) ||
@@ -63,7 +66,9 @@ var falafel = require('falafel');
     }
 
     function isQunitEqual(callee) {
-      return callee.type === 'MemberExpression';
+      return callee.type === 'MemberExpression' &&
+        callee.object && callee.object.name === 'QUnit' &&
+        callee.property && callee.property.name === 'equal';
     }
     return isEqual(statement.expression.callee) ||
       isQunitEqual(statement.expression.callee);
@@ -114,7 +119,7 @@ var falafel = require('falafel');
       //check.verify.unemptyString(fn.name,
       //  'for now qunit-helpful needs test function to have a name');
       var output = falafel(testSource, rewriteTestFunction);
-      console.log('rewritten function\n' + output);
+      // console.log('rewritten function\n' + output);
 
       /* jshint -W061 */
       fn = eval('(' + output + ')');

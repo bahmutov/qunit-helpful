@@ -16,16 +16,18 @@
 
 ```js
 // Standard QUnit
-QUnit.test('ok expression', function () {
+QUnit.test('simple test', function () {
   ok(2 + 2 === 5);
+  equal(2 + 2, 5);
 });
 // output
-Errors:
-Module: global function syntax (ok, equal) Test: ok expression
+  Errors:
+    Module: global function syntax (ok, equal) Test: ok expression
 // load qunit-helpful.js before tests, same test output
-Errors:
-Module: global function syntax (ok, equal) Test: ok expression
-failed ok "2 + 2 === 5"
+  Errors:
+    Module: global function syntax (ok, equal) Test: ok expression
+    failed ok "2 + 2 === 5"
+    failed equal [2 + 2](actual) == [5](expected)
 ```
 
 Comparison screenshots with the failed assertions for source
@@ -48,7 +50,7 @@ QUnit.test('ok expression', function () {
 
 ## Supported assertions
 
-This package rewrites `ok, QUnit.ok, equal` assertions, leaving the rest of the
+This package rewrites `ok, QUnit.ok, equal, QUnit.equal` assertions, leaving the rest of the
 code unchanged. I might add other [QUnit assertions](http://api.qunitjs.com/category/assert/)
 if needed.
 
