@@ -99,6 +99,12 @@ Other QUnit plugins I wrote:
 * [qunit-promises](https://github.com/bahmutov/qunit-promises)
 * [qunit-inject](https://github.com/bahmutov/qunit-inject)
 
+There is a different approach to improving assertion messages: grab the
+[detailed callsite](https://github.com/visionmedia/callsite) as
+[better-assert](https://www.npmjs.org/package/better-assert) does. Unfortunately,
+this is limited to V8 javascript engine only. My approach should work with almost
+any modern javascript engine (as long as supports correct function `toString` method).
+
 ## Small print
 
 Author: Gleb Bahmutov &copy; 2014 @bahmutov
