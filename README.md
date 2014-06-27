@@ -78,7 +78,8 @@ QUnit.equal(foo('a', 1), 'foo-a-1');
 // QUnit.equal(foo('a', 1), 'foo-a-1', 'equal "foo('a', 1)" and "foo-a-1"');
 ```
 
-Unknown or custom assertions will be left unchanged.
+Unknown or custom assertions will be left unchanged. The source rewriting is done
+using [falafel](https://www.npmjs.org/package/falafel).
 
 ## Install
 
@@ -111,7 +112,7 @@ There is a different approach to improving assertion messages: grab the
 [detailed callsite](https://github.com/visionmedia/callsite) as
 [better-assert](https://www.npmjs.org/package/better-assert) does. Unfortunately,
 this is limited to V8 javascript engine only. My approach should work with almost
-any modern javascript engine (as long as supports correct function `toString` method).
+any modern javascript engine (as long as it supports correct function `toString` method).
 
 ## Small print
 
