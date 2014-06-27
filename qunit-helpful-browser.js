@@ -4554,22 +4554,73 @@ var falafel = require('falafel');
     }
   }
 
-  function isOk(callee) {
-    return callee.name === 'ok';
+  function rewriteEqualMessage(statement) {
+    if (statement.expression.arguments.length < 2) {
+      return;
+    }
+
+    var actualNode = statement.expression.arguments[0];
+    var actual = actualNode.source();
+    actual = actual.replace(/'/g, '"');
+
+    var expectedNode = statement.expression.arguments[1];
+    var expected = expectedNode.source();
+    expected = expected.replace(/'/g, '"');
+
+    var helpfulMessage = '\'failed equal [' + actual + '](actual) == [' + expected + '](expected)';
+
+    var msgArg = statement.expression.arguments[2];
+    if (msgArg) {
+      var message = msgArg.source();
+      var strippedQuotes = message.replace(/'/g, '');
+      helpfulMessage += ', ' + strippedQuotes + '\'';
+      msgArg.update(helpfulMessage);
+    } else {
+      expectedNode.update(actual + ', ' + helpfulMessage + '\'');
+    }
   }
 
-  function isQunitOk(callee) {
-    return callee.type === 'MemberExpression';
+  function isOkAssert(statement) {
+    function isOk(callee) {
+      return callee.name === 'ok';
+    }
+
+    function isQunitOk(callee) {
+      return callee.type === 'MemberExpression' &&
+        callee.object && callee.object.name === 'QUnit' &&
+        callee.property && callee.property.name === 'ok';
+    }
+
+    return isOk(statement.expression.callee) ||
+      isQunitOk(statement.expression.callee);
+  }
+
+  function isEqualAssert(statement) {
+    function isEqual(callee) {
+      return callee.name === 'equal';
+    }
+
+    function isQunitEqual(callee) {
+      return callee.type === 'MemberExpression' &&
+        callee.object && callee.object.name === 'QUnit' &&
+        callee.property && callee.property.name === 'equal';
+    }
+    return isEqual(statement.expression.callee) ||
+      isQunitEqual(statement.expression.callee);
   }
 
   function rewriteTestFunction(node) {
     if (node.type === 'BlockStatement') {
       node.body.forEach(function (statement) {
         if (statement.type === 'ExpressionStatement' &&
-          statement.expression.type === 'CallExpression' &&
-          (isOk(statement.expression.callee) || isQunitOk(statement.expression.callee))) {
+          statement.expression.type === 'CallExpression') {
+
+          if (isOkAssert(statement)) {
             rewriteOkMessage(statement);
+          } else if (isEqualAssert(statement)) {
+            rewriteEqualMessage(statement);
           }
+        }
       });
     }
   }
@@ -4604,6 +4655,7 @@ var falafel = require('falafel');
       //  'for now qunit-helpful needs test function to have a name');
       var output = falafel(testSource, rewriteTestFunction);
       // console.log('rewritten function\n' + output);
+
       /* jshint -W061 */
       fn = eval('(' + output + ')');
 

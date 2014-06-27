@@ -16,16 +16,18 @@
 
 ```js
 // Standard QUnit
-QUnit.test('ok expression', function () {
+QUnit.test('simple test', function () {
   ok(2 + 2 === 5);
+  equal(2 + 2, 5);
 });
 // output
-Errors:
-Module: global function syntax (ok, equal) Test: ok expression
+  Errors:
+    Module: global function syntax (ok, equal) Test: ok expression
 // load qunit-helpful.js before tests, same test output
-Errors:
-Module: global function syntax (ok, equal) Test: ok expression
-failed ok "2 + 2 === 5"
+  Errors:
+    Module: global function syntax (ok, equal) Test: ok expression
+    failed ok "2 + 2 === 5"
+    failed equal [2 + 2](actual) == [5](expected)
 ```
 
 Comparison screenshots with the failed assertions for source
@@ -45,6 +47,12 @@ QUnit.test('ok expression', function () {
 ### QUnit + qunit-helpful with failed ok(expression)
 
 ![qunit-helpful-on](images/qunit-helpful-on.png)
+
+## Supported assertions
+
+This package rewrites `ok, QUnit.ok, equal, QUnit.equal` assertions, leaving the rest of the
+code unchanged. I might add other [QUnit assertions](http://api.qunitjs.com/category/assert/)
+if needed.
 
 ## Explanation
 
@@ -98,6 +106,12 @@ Other QUnit plugins I wrote:
 * [qunit-once](https://github.com/bahmutov/qunit-once)
 * [qunit-promises](https://github.com/bahmutov/qunit-promises)
 * [qunit-inject](https://github.com/bahmutov/qunit-inject)
+
+There is a different approach to improving assertion messages: grab the
+[detailed callsite](https://github.com/visionmedia/callsite) as
+[better-assert](https://www.npmjs.org/package/better-assert) does. Unfortunately,
+this is limited to V8 javascript engine only. My approach should work with almost
+any modern javascript engine (as long as supports correct function `toString` method).
 
 ## Small print
 
