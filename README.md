@@ -48,8 +48,9 @@ QUnit.test('ok expression', function () {
 
 ## Supported assertions
 
-This package rewrites `QUnit.ok` assertion, leaving the rest of the
-code unchanged.
+This package rewrites `ok, QUnit.ok, equal` assertions, leaving the rest of the
+code unchanged. I might add other [QUnit assertions](http://api.qunitjs.com/category/assert/)
+if needed.
 
 ## Explanation
 
