@@ -4610,6 +4610,11 @@ var falafel = require('falafel');
   }
 
   function rewriteTestFunction(node) {
+    console.log('node', node.type);
+    if (node.type === 'FunctionDeclaration') {
+      console.log('function with params', node.params);
+    }
+
     if (node.type === 'BlockStatement') {
       node.body.forEach(function (statement) {
         if (statement.type === 'ExpressionStatement' &&
@@ -4654,7 +4659,7 @@ var falafel = require('falafel');
       //check.verify.unemptyString(fn.name,
       //  'for now qunit-helpful needs test function to have a name');
       var output = falafel(testSource, rewriteTestFunction);
-      // console.log('rewritten function\n' + output);
+      console.log('rewritten function\n' + output);
 
       /* jshint -W061 */
       fn = eval('(' + output + ')');
