@@ -44,7 +44,8 @@ module.exports = function (grunt) {
           './test/tests-ok.js',
           './test/tests-qunit-ok.js',
           './test/tests-equal.js',
-          './test/tests-qunit-equal.js'
+          './test/tests-qunit-equal.js',
+          './test/tests-closures.js'
         ]
       }
     },
