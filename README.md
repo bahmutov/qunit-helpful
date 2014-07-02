@@ -2,7 +2,8 @@
 
 > QUnit plugin to automatically show helpful info for failed assertions
 
-[Test page](http://glebbahmutov.com/qunit-helpful/)
+[Test page](http://glebbahmutov.com/qunit-helpful/),
+[tests with variable injection](http://glebbahmutov.com/qunit-helpful/index-with-inject.html)
 
 [![NPM][qunit-helpful-icon]][qunit-helpful-url]
 
