@@ -1,7 +1,7 @@
 {
   "name": "qunit-helpful",
   "description": "QUnit plugin to automatically show helpful info for failed assertions",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": {
     "url": "https://github.com/bahmutov/qunit-helpful/issues"
@@ -43,7 +43,8 @@
     "help",
     "assertions",
     "context",
-    "info"
+    "info",
+    "helpful"
   ],
   "license": "MIT",
   "main": "qunit-helpful.js",
