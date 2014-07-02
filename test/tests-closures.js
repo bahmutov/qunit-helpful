@@ -14,14 +14,16 @@
   });
 }(typeof window !== 'undefined' ? window : global));
 
-/*
 (function () {
   QUnit.module('closure variables');
 
   var foo = 'foo';
+  // foo cannot be accessed from rewritten test function
 
   QUnit.test('variable foo', function () {
-    QUnit.equal(foo, 'fo');
+    QUnit.throws(function () {
+      QUnit.equal(foo, 'fo');
+    }, 'ReferenceError');
   });
 }());
-*/
+

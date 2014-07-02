@@ -125,7 +125,7 @@ var falafel = require('falafel');
       //check.verify.unemptyString(fn.name,
       //  'for now qunit-helpful needs test function to have a name');
       var output = falafel(testSource, rewriteTestFunction);
-      // console.log('rewritten function\n' + output);
+      console.log('rewritten function\n' + output);
 
       /* jshint -W061 */
       fn = eval('(' + output + ')');
