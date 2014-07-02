@@ -69,7 +69,7 @@ module.exports = function (grunt) {
         options: {
           grunt: true
         },
-        tasks: ['qunit', 'node-qunit:all', 'node-qunit:pureInject']
+        tasks: ['qunit', 'node-qunit']
       }
     },
 

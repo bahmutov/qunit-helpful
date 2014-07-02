@@ -14,7 +14,7 @@
   });
 
   QUnit.test('just injection with assertion', function (foo) {
-    QUnit.equal(foo, 'foo');
+    QUnit.equal(foo, 'f' + 'o' + 'o');
   });
 }());
 

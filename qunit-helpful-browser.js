@@ -4541,16 +4541,16 @@ var falafel = require('falafel');
     var conditionNode = okStatement.expression.arguments[0];
     var condition = conditionNode.source();
     condition = condition.replace(/'/g, '"');
-    var helpfulMessage = '\'failed ok [' + condition + ']';
+    var helpfulMessage = '\'failed QUnit.ok(' + condition;
 
     var msgArg = okStatement.expression.arguments[1];
     if (msgArg) {
       var message = msgArg.source();
       var strippedQuotes = message.replace(/'/g, '');
-      helpfulMessage += ', ' + strippedQuotes + '\'';
+      helpfulMessage += ', "' + strippedQuotes + '")\'';
       msgArg.update(helpfulMessage);
     } else {
-      conditionNode.update(condition + ', ' + helpfulMessage + '\'');
+      conditionNode.update(condition + ', ' + helpfulMessage + ')\'');
     }
   }
 
@@ -4567,16 +4567,16 @@ var falafel = require('falafel');
     var expected = expectedNode.source();
     expected = expected.replace(/'/g, '"');
 
-    var helpfulMessage = '\'failed equal [' + actual + '](actual) == [' + expected + '](expected)';
+    var helpfulMessage = '\'failed QUnit.equal(' + actual + ', ' + expected;
 
     var msgArg = statement.expression.arguments[2];
     if (msgArg) {
       var message = msgArg.source();
       var strippedQuotes = message.replace(/'/g, '');
-      helpfulMessage += ', ' + strippedQuotes + '\'';
+      helpfulMessage += ', "' + strippedQuotes + '")\'';
       msgArg.update(helpfulMessage);
     } else {
-      expectedNode.update(expected + ', ' + helpfulMessage + '\'');
+      expectedNode.update(expected + ', ' + helpfulMessage + ')\'');
     }
   }
 
@@ -4660,7 +4660,7 @@ var falafel = require('falafel');
       //check.verify.unemptyString(fn.name,
       //  'for now qunit-helpful needs test function to have a name');
       var output = falafel(testSource, rewriteTestFunction);
-      console.log('rewritten function\n' + output);
+      // console.log('rewritten function\n' + output);
 
       /* jshint -W061 */
       fn = eval('(' + output + ')');
