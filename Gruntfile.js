@@ -47,6 +47,20 @@ module.exports = function (grunt) {
           './test/tests-qunit-equal.js',
           './test/tests-closures.js'
         ]
+      },
+      pureInject: {
+        deps: './node_modules/qunit-inject/qunit-inject.js',
+        code: './node_modules/qunit-inject/qunit-inject.js',
+        tests: [
+          './test/tests-with-inject.js'
+        ]
+      },
+      inject: {
+        deps: './node_modules/qunit-inject/qunit-inject.js',
+        code: './qunit-helpful.js',
+        tests: [
+          './test/tests-with-inject.js'
+        ]
       }
     },
 
@@ -55,7 +69,7 @@ module.exports = function (grunt) {
         options: {
           grunt: true
         },
-        tasks: ['qunit', 'node-qunit']
+        tasks: ['qunit', 'node-qunit:all', 'node-qunit:pureInject']
       }
     },
 
