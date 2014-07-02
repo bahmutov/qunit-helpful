@@ -4541,16 +4541,16 @@ var falafel = require('falafel');
     var conditionNode = okStatement.expression.arguments[0];
     var condition = conditionNode.source();
     condition = condition.replace(/'/g, '"');
-    var helpfulMessage = '\'failed ok [' + condition + ']';
+    var helpfulMessage = '\'QUnit.ok(' + condition;
 
     var msgArg = okStatement.expression.arguments[1];
     if (msgArg) {
       var message = msgArg.source();
       var strippedQuotes = message.replace(/'/g, '');
-      helpfulMessage += ', ' + strippedQuotes + '\'';
+      helpfulMessage += ', "' + strippedQuotes + '")\'';
       msgArg.update(helpfulMessage);
     } else {
-      conditionNode.update(condition + ', ' + helpfulMessage + '\'');
+      conditionNode.update(condition + ', ' + helpfulMessage + ')\'');
     }
   }
 
@@ -4567,16 +4567,16 @@ var falafel = require('falafel');
     var expected = expectedNode.source();
     expected = expected.replace(/'/g, '"');
 
-    var helpfulMessage = '\'failed equal [' + actual + '](actual) == [' + expected + '](expected)';
+    var helpfulMessage = '\'QUnit.equal(' + actual + ', ' + expected;
 
     var msgArg = statement.expression.arguments[2];
     if (msgArg) {
       var message = msgArg.source();
       var strippedQuotes = message.replace(/'/g, '');
-      helpfulMessage += ', ' + strippedQuotes + '\'';
+      helpfulMessage += ', "' + strippedQuotes + '")\'';
       msgArg.update(helpfulMessage);
     } else {
-      expectedNode.update(actual + ', ' + helpfulMessage + '\'');
+      expectedNode.update(expected + ', ' + helpfulMessage + ')\'');
     }
   }
 
@@ -4610,6 +4610,12 @@ var falafel = require('falafel');
   }
 
   function rewriteTestFunction(node) {
+    // console.log('node', node.type);
+    /*
+    if (node.type === 'FunctionDeclaration') {
+      console.log('function with params', node.params);
+    }*/
+
     if (node.type === 'BlockStatement') {
       node.body.forEach(function (statement) {
         if (statement.type === 'ExpressionStatement' &&

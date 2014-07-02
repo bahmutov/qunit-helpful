@@ -2,7 +2,8 @@
 
 > QUnit plugin to automatically show helpful info for failed assertions
 
-[Test page](http://glebbahmutov.com/qunit-helpful/)
+[Test page](http://glebbahmutov.com/qunit-helpful/),
+[tests with variable injection](http://glebbahmutov.com/qunit-helpful/index-with-inject.html)
 
 [![NPM][qunit-helpful-icon]][qunit-helpful-url]
 
@@ -26,8 +27,8 @@ QUnit.test('simple test', function () {
 // load qunit-helpful.js before tests, same test output
   Errors:
     Module: global function syntax (ok, equal) Test: ok expression
-    failed ok "2 + 2 === 5"
-    failed equal [2 + 2](actual) == [5](expected)
+    QUnit.ok("2 + 2 === 5")
+    QUnit.equal(2 + 2, 5)
 ```
 
 Comparison screenshots with the failed assertions for source
@@ -98,6 +99,37 @@ bower install qunit-helpful
 // include the qunit js script first, then
 <script src="bower_components/qunit-helpful/qunit-helpful-browser.js"></script>
 // then include user tests
+```
+
+## Limitations
+
+* `assert` argument to the unit test is not supported yet, please use `QUnit.equal` rather than
+`function (assert) { assert.equal(...); }`
+
+* global variables should be ok, but closure variables to the unit test will cause ReferenceError.
+This is due to the dynamic source code rewriting and evaluation which leads to the test to have
+a different lexical scope location.
+
+```js
+// will cause ReferenceError
+var foo = 'foo';
+QUnit.test('check foo', function () {
+  QUnit.equal(foo, 'foo');
+});
+```
+
+### Workaround
+
+If you need external non-global variables, use [qunit-inject](https://github.com/bahmutov/qunit-inject)
+to inject them. Load *qunit-inject* before *qunit-helpful* and it should work.
+
+```js
+QUnit.module('injection', {
+  foo: 'foo'
+});
+QUnit.test('check foo', function (foo) {
+  QUnit.equal(foo, 'foo');
+});
 ```
 
 ## Related
