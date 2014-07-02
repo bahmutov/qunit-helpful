@@ -32,7 +32,8 @@ module.exports = function (grunt) {
     },
 
     qunit: {
-      all: ['index.html']
+      all: ['index.html'],
+      inject: ['index-with-inject.html']
     },
 
     'node-qunit': {
@@ -89,9 +90,11 @@ module.exports = function (grunt) {
       },
       src: [
         'index.html',
+        'index-with-inject.html',
         'README.md',
         'qunit-helpful-browser.js',
-        'test/*.js'
+        'test/*.js',
+        'node_modules/qunit-inject/qunit-inject-browser.js'
       ]
     }
   });

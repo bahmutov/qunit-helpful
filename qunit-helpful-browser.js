@@ -4541,7 +4541,7 @@ var falafel = require('falafel');
     var conditionNode = okStatement.expression.arguments[0];
     var condition = conditionNode.source();
     condition = condition.replace(/'/g, '"');
-    var helpfulMessage = '\'failed QUnit.ok(' + condition;
+    var helpfulMessage = '\'QUnit.ok(' + condition;
 
     var msgArg = okStatement.expression.arguments[1];
     if (msgArg) {
@@ -4567,7 +4567,7 @@ var falafel = require('falafel');
     var expected = expectedNode.source();
     expected = expected.replace(/'/g, '"');
 
-    var helpfulMessage = '\'failed QUnit.equal(' + actual + ', ' + expected;
+    var helpfulMessage = '\'QUnit.equal(' + actual + ', ' + expected;
 
     var msgArg = statement.expression.arguments[2];
     if (msgArg) {
