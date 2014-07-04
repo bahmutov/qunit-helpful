@@ -23,12 +23,12 @@ QUnit.test('simple test', function () {
 
 // output
   Errors:
-    Module: global function syntax (ok, equal) Test: ok expression
+    Module: global Test: simple test
 
 // load qunit-helpful.js before tests, same test
 // output
   Errors: ok [2 + 2 === 5]
-    Module: global function syntax (ok, equal) Test: ok expression
+    Module: global Test: simple test
 ```
 
 Comparison screenshots with the failed assertions for source
