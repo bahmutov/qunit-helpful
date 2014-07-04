@@ -16,15 +16,17 @@
 ## Example:
 
 ```js
-// Standard QUnit
+// QUnit test with failing assertion
 QUnit.test('simple test', function () {
   ok(2 + 2 === 5);
 });
+
 // output
   Errors:
     Module: global function syntax (ok, equal) Test: ok expression
 
-// load qunit-helpful.js before tests, same test output
+// load qunit-helpful.js before tests, same test
+// output
   Errors: ok [2 + 2 === 5]
     Module: global function syntax (ok, equal) Test: ok expression
 ```
