@@ -118,7 +118,19 @@ QUnit.test('check foo', function () {
 });
 ```
 
-### Workaround
+### Workaround 1
+
+Skip dynamic test rewriting in this case by adding suffix `noHelp` or `no_help` to the test
+function name
+
+```js
+var foo = 'foo';
+QUnit.test('check foo', function checkFooNoHelp() {
+  QUnit.equal(foo, 'foo');
+});
+```
+
+### Workaround 2
 
 If you need external non-global variables, use [qunit-inject](https://github.com/bahmutov/qunit-inject)
 to inject them. Load *qunit-inject* before *qunit-helpful* and it should work.

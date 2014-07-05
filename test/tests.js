@@ -21,4 +21,17 @@
     var foo = 'foo';
     ok(foo === 'foo', foo);
   });
+
+  QUnit.module('does not rewrite functions with special suffix');
+
+  // foo cannot be used from unit tests (it is a closure variable)
+  var foo = 'foo';
+
+  QUnit.test('access foo', function checkFooNoHelp() {
+    QUnit.equal(foo, 'fo' + 'o');
+  });
+
+  QUnit.test('access foo', function check_foo_no_help() {
+    QUnit.equal(foo, 'fo' + 'o');
+  });
 }());
