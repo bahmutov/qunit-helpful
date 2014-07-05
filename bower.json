@@ -1,7 +1,7 @@
 {
   "name": "qunit-helpful",
   "main": "qunit-helpful-browser.js",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "QUnit plugin to automatically show helpful info for failed assertions",
   "keywords": [
     "qunit",

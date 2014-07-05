@@ -16,4 +16,15 @@
     ok('foo' + 'bar' == 'foobar');
     ok("foo" + "bar" == 'foobar');
   });
+
+  QUnit.test('multiline condition', function () {
+    var foo = {
+      foo: 'foo'
+    };
+    ok(foo === foo);
+    ok(foo !== {});
+    ok(foo !== { foo: 'foo' });
+    ok(foo !== {
+      foo: 'foo' });
+  });
 }());

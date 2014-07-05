@@ -7,6 +7,7 @@ var falafel = require('falafel');
     var condition = conditionNode.source();
     condition = condition.replace(/'/g, '"');
     var helpfulMessage = '\'QUnit.ok(' + condition;
+    helpfulMessage = helpfulMessage.replace('\n', '\\n');
 
     var msgArg = okStatement.expression.arguments[1];
     if (msgArg) {
@@ -33,6 +34,7 @@ var falafel = require('falafel');
     expected = expected.replace(/'/g, '"');
 
     var helpfulMessage = '\'QUnit.equal(' + actual + ', ' + expected;
+    helpfulMessage = helpfulMessage.replace('\n', '\\n');
 
     var msgArg = statement.expression.arguments[2];
     if (msgArg) {
