@@ -9,4 +9,16 @@
     /* global ok */
     ok(2 + 2 === 4);
   });
+
+  QUnit.module('works with global test function');
+
+  /* global test */
+  test('helpful message in test function', function () {
+    ok(2 + 2 === 4);
+  });
+
+  test('additional arguments', function () {
+    var foo = 'foo';
+    ok(foo === 'foo', foo);
+  });
 }());

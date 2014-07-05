@@ -107,7 +107,7 @@ var falafel = require('falafel');
 
     var _test = QUnit.test;
 
-    QUnit.test = function (a1, a2, a3) {
+    env.test = QUnit.test = function (a1, a2, a3) {
       var name = a1,
         nAssertions = (typeof a2 === 'number' ? a2 : null),
         fn = (typeof a3 === 'function' ? a3 : a2);
