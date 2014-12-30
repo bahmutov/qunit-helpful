@@ -33,7 +33,8 @@
         negativeNumber: negativeNumber,
         intNumber : intNumber,
         floatNumber : floatNumber,
-        number: number
+        number: number,
+        bool: bool
     };
 
     messages = {
@@ -58,7 +59,8 @@
         negativeNumber: 'Invalid number',
         intNumber: 'Invalid number',
         floatNumber: 'Invalid number',
-        number: 'Invalid number'
+        number: 'Invalid number',
+        bool: 'Invalid boolean'
     };
 
     functions = {
@@ -394,6 +396,18 @@
     }
 
     /**
+     * Public function `bool`.
+     *
+     * Returns `true` if something is a bool,
+     * `false` otherwise.
+     *
+     * @param thing The thing to test.
+     */
+    function bool (thing) {
+        return thing === false || thing === true;
+    }
+
+    /**
      * Public function `map`.
      *
      * Returns the results hash of mapping each predicate to the
@@ -558,7 +572,7 @@
             define(function () {
                 return functions;
             });
-        } else if (typeof module !== 'undefined' && module !== null) {
+        } else if (typeof module !== 'undefined' && module !== null && module.exports) {
             module.exports = functions;
         } else {
             globals.check = functions;
@@ -4679,4 +4693,4 @@ var falafel = require('falafel');
 
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"check-types":1,"falafel":2}]},{},[4])
+},{"check-types":1,"falafel":2}]},{},[4]);
